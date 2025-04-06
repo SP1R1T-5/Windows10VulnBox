@@ -1,6 +1,3 @@
-#  Alternative Windows Vulnerability Script
-# Creates different artifacts for Nessus scans to detect
-# Educational purposes only - for security training
 
 # ------------------------------
 # 1. Create Registry Evidence of Known CVEs
