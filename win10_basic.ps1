@@ -33,11 +33,13 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "restr
 Set-SmbServerConfiguration -EnableSMBGuestAccess $true -Force
 
 # ------------------------------
-# 6. Enable RDP and Disable NLA
+# 6. Enable RDP and Disable NLA 
 # ------------------------------
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value 0
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+New-NetFirewallRule -DisplayName "RDP-TCP-In" -Direction Inbound -Protocol TCP -LocalPort 3389 -Action Allow -Profile Any
+New-NetFirewallRule -DisplayName "RDP-UDP-In" -Direction Inbound -Protocol UDP -LocalPort 3389 -Action Allow -Profile Any
 
 # ------------------------------
 # 7. Install IIS (Default Web Server)
